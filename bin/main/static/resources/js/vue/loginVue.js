@@ -2,7 +2,7 @@
 var loginVue = loginVue || {}
 loginVue = {
 	loginVuego : ()=>{
-		return `<div id="loginform" style="width:1500px; border:1px solid black; text-align:center;">
+		return `<div class="loginform" style="width:1500px; border:1px solid black; text-align:center;">
 
 			<h3>로그인</h3>
 			<div id="write_form">
@@ -19,9 +19,9 @@ loginVue = {
 				</div>
 
 				<div class="login_search">
-					<a href="" target="_'blank" id="search_id">아이디 찾기</a>
+					<button type="button" id="search_id" style="background:none; border:none;">아이디 찾기</button>
 						<span>|</span>
-					<a href="">비밀번호 찾기</a>
+					<button type="button" id="search_pw" style="background:none; border:none;">비밀번호 찾기</button>
 				</div>
 			</div>
 
@@ -38,7 +38,7 @@ loginVue = {
 						letter-spacing: -3.px;">
 						<span>로그인</span>
 					</button>
-					<button style="display:block; float:center; width:340px; height:50px; margin-top:5px;"><a id="go_join">회원가입</a></button>
+					<button id="go_join" type="button" style="display:block; float:center; width:340px; height:50px; margin-top:5px;">회원가입</button>
 				</div>
 			
 			</div>
