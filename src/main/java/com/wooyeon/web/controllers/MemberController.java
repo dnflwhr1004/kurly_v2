@@ -52,6 +52,7 @@ public class MemberController {
 		Function<Member, Member> m = t->memberMapper.selectUserByIdPw(param);
 		return m.apply(param);
 	}
+
 	
 	@GetMapping("/{userId}")
 	public Member searchMemberById(@PathVariable String userId, @RequestBody Member param) {

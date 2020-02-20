@@ -19,16 +19,18 @@
    <select id="selectUserByIdPw" resultType="Member" >
     SELECT *
     FROM users
-    WHERE userId LIKE #{userId}
+    WHERE userid LIKE #{userid}
     AND passwd LIKE #{passwd}
    </select>
    
    <update id="updateMember">
-   
+   	
    </update>
   
-  <delete id="">
-  
+  <delete id="deleteMember">
+  	DELETE 
+  	FROM member
+  	WHERE userid LIKE #{userid}
   </delete>
   
 </mapper>

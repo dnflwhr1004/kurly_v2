@@ -2,25 +2,20 @@
 var app = app || {};
 
 app = (()=>{
-	const WHEN_ERR = '호출하는 appJS 파일을 찾지 못했습니다.'
-	
-	let run=()=>{
-		onCreate()	
-	}
+	let init=()=>{
+		import('/resources/js/vue/homeVue.js').then(()=>{
 
-	let onCreate=()=>{
-		$.when(
-			import('/resources/js/home/home.js').then(()=>{
-			})
-		)
-		.done(()=>{
-			home.onCreate()
+			$(homeVue.mainimg()).appendTo('.container')
+			//$(homeVue.recommand()).appendTo('.mainImg')
 		})
-		.fail(()=>{
-			alert(WHEN_ERR)
-		})}
-	
+	}
+	let run=()=>{
+		alert('run')
+		init()
+	}
+	let setContentView=()=>{
 
+	}
 
 	return {run}
 })()
