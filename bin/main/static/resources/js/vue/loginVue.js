@@ -9,9 +9,9 @@ loginVue = {
 			<h3>로그인</h3>
 			<div id="write_form">
 				<div style="display:inline-block;">
-				<input style="display:block; float:center; width:340px; height:50px;" type="text" placeholder="아이디를 입력해주세요">
+				<input id="userId" style="display:block; float:center; width:340px; height:50px;" type="text" placeholder="아이디를 입력해주세요">
 				
-				<input style="display:block; float:center; width:340px; height:50px; margin-top:5px;" type="text" placeholder="비밀번호를 입력해주세요">
+				<input id="passwd" style="display:block; float:center; width:340px; height:50px; margin-top:5px;" type="text" placeholder="비밀번호를 입력해주세요">
 				</div>
 
 			<div class="searchs">
@@ -47,16 +47,7 @@ loginVue = {
 
 		</div>
 
-	</div>
-	<script>
-	$('#search_id').click(e=>{
-			e.preventDefault()
-			alert('search_id')
-			$('#body').empty()
-			$('#body').html(idsearchVue.idsearchVue_go)
-		})
-		
-	</script>`
+	</div>`
 	
 	}
 }

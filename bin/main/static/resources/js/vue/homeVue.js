@@ -289,7 +289,7 @@ homeVue = {
       <div class="float-right " style=" width: 20%;" >
       <div class="row " style="color: #333333;font-size: 0.8em; ">
             <div style="color: #5f0080; margin-right: 5%"><a id="gojoin" href="">회원가입 </a> </div>
-            <div style="margin-right: 5%"><a id="gologin" href="">로그인</a></div>
+            <div id="gologin_btn" style="margin-right: 5%"><a id="gologin" href="">로그인</a></div>
             <div><a href="">배송지역 검색</a></div>
      </div>
    </div>

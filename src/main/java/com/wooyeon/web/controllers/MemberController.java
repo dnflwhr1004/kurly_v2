@@ -47,20 +47,21 @@ public class MemberController {
 		return map;
 	}
 	
-	@PostMapping("/{userId}")
-	public Member login(@PathVariable String userId, @RequestBody Member param) {
+	@PostMapping("/login")
+	public Member login(@RequestBody Member param) {
 		Function<Member, Member> m = t->memberMapper.selectUserByIdPw(param);
+		System.out.println("000000"+param);
 		return m.apply(param);
 	}
 
 	
-	@GetMapping("/{userId}")
+	@GetMapping("/search")
 	public Member searchMemberById(@PathVariable String userId, @RequestBody Member param) {
 		Function<Member, Member> f= t-> memberMapper.selectUserByIdPw(param);
 		return f.apply(param);
 	}
 	
-	@PutMapping("/{userId}")
+	@PutMapping("/update")
 	public Map<?, ?> updateMember(@PathVariable String userId, @RequestBody Member param) {
 		Consumer<Member> m = o->memberMapper.updateMember(param);
 		m.accept(param);
@@ -69,7 +70,7 @@ public class MemberController {
 		return map;
 	}
 	
-	@DeleteMapping("/{userId}")
+	@DeleteMapping("/remove")
 	public Map<?, ?> removeMember(@PathVariable String userId, @RequestBody Member param) {
 		Consumer<Member> m = o->memberMapper.deleteMember(param);
 		m.accept(param);

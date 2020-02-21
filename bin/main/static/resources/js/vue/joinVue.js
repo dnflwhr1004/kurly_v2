@@ -23,7 +23,7 @@ joinVue = {
 
          <tr style="width:609px; height:60px;">
             <td style="width: 149px; height:60px;">아이디*</td>
-            <td style="width: 460px; height:60px;"><input type="text" value maxlength="16"
+            <td style="width: 460px; height:60px;"><input id="userId" type="text" value maxlength="16"
             label="id" style="width:300px; height:40px;" placeholder="6자 이상의 영문 혹은 영문과 숫자를 조합">
             <button type="button" style="width: 150px; height:40px;">중복확인</button>
          </td>
@@ -31,28 +31,28 @@ joinVue = {
 
          <tr style="width:609px; height:60px;">
             <td style="width: 149px; height:60px;">비밀번호*</td>
-            <td style="width: 460px; height:60px;"><input type="text" value maxlength="16"
+            <td style="width: 460px; height:60px;"><input id="passwd" type="text" value maxlength="16"
             label="id" style="width:300px; height:40px;" placeholder="비밀번호를 입력해주세요">
          </td>
          </tr>
 
          <tr style="width:609px; height:60px;">
             <td style="width: 149px; height:60px;">비밀번호확인*</td>
-            <td style="width: 460px; height:60px;"><input type="text" value maxlength="16"
+            <td style="width: 460px; height:60px;"><input id="passwd" type="text" value maxlength="16"
             label="id" style="width:300px; height:40px;" placeholder="비밀번호를 한번 더 입력해주세요">
          </td>
          </tr>
 
          <tr style="width:609px; height:60px;">
             <td style="width: 149px; height:60px;">이름*</td>
-            <td style="width: 460px; height:60px;"><input type="text" value maxlength="16"
+            <td style="width: 460px; height:60px;"><input id="username" type="text" value maxlength="16"
             label="id" style="width:300px; height:40px;" placeholder="고객님의 이름을 입력해주세요">
          </td>
          </tr>
 
          <tr style="width:609px; height:60px;">
             <td style="width: 149px; height:60px;">이메일*</td>
-            <td style="width: 460px; height:60px;"><input type="text" value maxlength="16"
+            <td style="width: 460px; height:60px;"><input id="email" type="text" value maxlength="16"
             label="id" style="width:300px; height:40px;" placeholder="예 : marketkurly@kurly.com">
             <button type="button" style="width: 150px; height:40px;">이메일중복확인</button>
          </td>
@@ -61,7 +61,7 @@ joinVue = {
          <tr style="width:609px; height:60px;">
             <td style="width: 149px; height:60px;">휴대폰*</td>
             <td style="width: 460px; height:60px;">
-               <input type="text" value maxlength="16"
+               <input id="tel" type="text" value maxlength="16"
                label="id" style="width:300px; height:40px;" placeholder="숫자만 입력해주세요">
                <button type="button" style="width: 150px; height:40px;">인증번호받기</button>
                

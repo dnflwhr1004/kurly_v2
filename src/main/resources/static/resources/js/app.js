@@ -5,7 +5,6 @@ app = (()=>{
 	let init=()=>{
 		
 		import('/resources/js/vue/homeVue.js').then(()=>{
-
 			$('body').html(homeVue.home_nav).append(homeVue.home_main).append(homeVue.home_footer);
 			gogojoin(),gogologin(),details(),goodshop()
 		}),
@@ -13,7 +12,6 @@ app = (()=>{
 			
 		}),
 		import('/resources/js/vue/loginVue.js').then(()=>{
-			search_info()
 		}),
 		import('/resources/js/vue/detailVue.js').then(()=>{
 
@@ -32,20 +30,6 @@ app = (()=>{
 		init()
 	}
 	
-	/* let homeevent=()=>{
-		window.onscroll = function() {myFunction()};
-		var navbar = document.getElementById("navbar");
-		var sticky = navbar.offsetTop;
-
-		function myFunction() {
-		if (window.pageYOffset >= sticky) {
-			navbar.classList.add("sticky")
-		} else {
-			navbar.classList.remove("sticky");
-		}
-	}
-} */
-
 	let gogojoin=()=>{
 		$('#gojoin').click(e=>{
 			e.preventDefault()
@@ -61,20 +45,51 @@ app = (()=>{
 			alert('gologin')
 			$('#body').empty()
 			$('#body').html(loginVue.loginVuego)
+		$('#search_id').click(e=>{
+			e.preventDefault()
+			alert('search_id')
+			$('#body').empty()
+			$('#body').html(idsearchVue.idsearchVue_go)
+		})
+		
+		$('#loginbtn').click(e=>{
+			e.preventDefault()
+			alert('zlzlzlzl')
 			$.ajax({
-				url:'/member/'+$('#userId').val(),
-				type:'POST',
-				data:JSON.stringify({userid : $('#userId').val(), passwd : $('#passwd').val()}),
-				dataType:'json',
-				contentType:'application/json',
-				success:d=>{
-					let a = d.userid
-					alert(JSON.stringify(a.userid+a.passwd))
-				},
-				error : e=> {
-					alert('로그인 실패')
+			url:'/member/login',
+			type:'POST',
+			data:JSON.stringify({
+				userId:$('#userId').val(),
+				passwd:$('#passwd').val()
+			}),
+			dataType:'json',
+			contentType:'application/json',
+			success: d=>{
+				let asd = d.userId
+				alert(JSON.stringify(asd))
+				sessionStorage.setItem("userid",asd)
+				sessionStorage.setItem("passwd",d.passwd)
+				console.log(sessionStorage.getItem("userid"))
+				console.log(sessionStorage.getItem("passwd"))
+				
+				if(asd ==null){
+					$('#body').empty()
+					$('#body').append(homeVue.home_main);
+				}else{
+					$('#body').empty()
+					$('#body').append(homeVue.home_main);
+					$('#gologin_btn').empty()
+					$('#gologin_btn').html('<a id="logout" href="">로그아웃</a>')
 				}
-			})
+				
+				
+			},
+			error : e=>{
+				alert('잘못된 id 또는 pw 입니다')
+			}
+		})
+		})
+		
 		})
 	}
 
@@ -110,10 +125,7 @@ app = (()=>{
 		})
 	}
 
-	let search_info=()=>{
-		
-	}
-
+	
 
 	return {run}
 })()
