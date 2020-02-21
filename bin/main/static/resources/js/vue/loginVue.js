@@ -2,7 +2,9 @@
 var loginVue = loginVue || {}
 loginVue = {
 	loginVuego : ()=>{
-		return `<div class="loginform" style="width:1500px; border:1px solid black; text-align:center;">
+		return `<div id = "wrapper">
+
+		<div class="loginform" style="width:1500px; text-align:center;">
 
 			<h3>로그인</h3>
 			<div id="write_form">
@@ -12,21 +14,21 @@ loginVue = {
 				<input style="display:block; float:center; width:340px; height:50px; margin-top:5px;" type="text" placeholder="비밀번호를 입력해주세요">
 				</div>
 
-			<div class="searchs" style="">
+			<div class="searchs">
 				<div class="check">
 						<label for="check_id">보안접속</label>
 						<input type="checkbox" name="" id="">
 				</div>
 
 				<div class="login_search">
-					<button type="button" id="search_id" style="background:none; border:none;">아이디 찾기</button>
+					<a href="" id="search_id">아이디 찾기</a>
 						<span>|</span>
-					<button type="button" id="search_pw" style="background:none; border:none;">비밀번호 찾기</button>
+					<a href="" id="search_pw">비밀번호 찾기</a>
 				</div>
 			</div>
 
 				<div style="display:inline-block;">
-					<button type="submit"  style="display: block;
+					<button id="loginbtn" type="submit"  style="display: block;
 						width:340px; height:54px;
 						margin:45px auto 0;
 						border: 0;
@@ -43,6 +45,18 @@ loginVue = {
 			
 			</div>
 
-		</div>`
+		</div>
+
+	</div>
+	<script>
+	$('#search_id').click(e=>{
+			e.preventDefault()
+			alert('search_id')
+			$('#body').empty()
+			$('#body').html(idsearchVue.idsearchVue_go)
+		})
+		
+	</script>`
+	
 	}
 }

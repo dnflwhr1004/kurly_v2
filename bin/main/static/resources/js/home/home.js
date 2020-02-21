@@ -22,6 +22,7 @@ home = (()=>{
 			setContentView()
 			gogojoin()
 			gogologin()
+			homeevent()
 		})
 		.fail(()=>{
 			alert(WHEN_ERR)
@@ -30,11 +31,7 @@ home = (()=>{
 	}
 
 	let setContentView=()=>{
-		$('body').html(homeVueVue.home_VueVue).append(homeVueVue.homeMain).append(homeVueVue.homeFooter);
-		//$('body').html(homeVueVue.homeNavBar).append(homeVueVue.homeMain).append(homeVueVue.homeFooter);
-		//$(homeVueVue.homeNavBar).append('body');
-		//$(homeVueVue.homeFooter).appendTo('body');
-		
+		$('body').html(homeVue.home_nav).append(homeVue.home_main).append(homeVue.homeVue);
 	}
 
 	let gogojoin=()=>{
@@ -53,5 +50,7 @@ home = (()=>{
 			login.onCreate()
 		})
 	}
+
+
 	return {onCreate}
 })()

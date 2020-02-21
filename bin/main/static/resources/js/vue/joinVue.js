@@ -6,17 +6,17 @@ joinVue = {
 		return `<style>
 .clearfix:after {display: block; clear: both; content: ''; visibility: hidden; }
 </style>
-<div id = "joininfo" style=" border:1px solid black;">
+<div id = "joininfo">
          <p style="text-align: center;">회원가입</p>
       </div>
       <div>
          <p style="float: right">*필수입력사항</p>
       </div>
 
-      <div class="writer" style="height:1200px; width:900px; display:block; padding: 3%; border:1px solid black;
+      <div class="writer" style="height:1200px; width:900px; display:block; padding: 3%;
                            margin:3% auto;">
          <table class="board" style="
-                              border:1px solid #f3f2f4;
+                              
                               background-color: #ffff;
                               height : 700px; width : 900px;
                               display:inline-block;">
@@ -129,7 +129,7 @@ joinVue = {
          </table>
 
          <div style="width:640px; padding: 29px 0 21px 29px;
-                              border:1px solid #f3f2f4;
+                              
                               background-color: #ffff;
                               margin: 12%;">
          
@@ -209,7 +209,10 @@ joinVue = {
          </div>
 
          </div>
-      </div>`
+      </div>
+      </br>
+      </br>
+      </br>`
 	}
 
 }
