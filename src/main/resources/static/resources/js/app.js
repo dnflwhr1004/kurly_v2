@@ -45,16 +45,21 @@ app = (()=>{
 			alert('gologin')
 			$('#body').empty()
 			$('#body').html(loginVue.loginVuego)
+			
 		$('#search_id').click(e=>{
 			e.preventDefault()
 			alert('search_id')
 			$('#body').empty()
 			$('#body').html(idsearchVue.idsearchVue_go)
 		})
-		
+		$('#search_pw').click(e=>{
+			e.preventDefault()
+			alert('search_pw')
+			$('#body').empty()
+			$('#body').html(pwsearchVue.pwsearchVue_go)
+		})
 		$('#loginbtn').click(e=>{
 			e.preventDefault()
-			alert('zlzlzlzl')
 			$.ajax({
 			url:'/member/login',
 			type:'POST',
