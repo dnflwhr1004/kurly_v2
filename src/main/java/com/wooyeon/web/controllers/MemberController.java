@@ -61,30 +61,16 @@ public class MemberController {
 		return memberService.login(param);
 	}
 	
+	@GetMapping("/{userId}/existId")
+	public Messenger existId(@PathVariable String userId) {
+		return Messenger.SUCCESS;
+	}
 	/*
 	@PostMapping("/selectNIP")
 	public Member selectNIP(@RequestBody Member member) {
 		System.out.println("controller"+member.getUserId());
 		return memberService.selectNIP(member);
 	}
-	
-	@GetMapping("/{userId}/exist")
-	public Map<?, ?> existId(@PathVariable String userId) {
-		Function<String, Integer> p = o-> memberMapper.existId(userId);
-		map.clear();
-		printer.accept("중복체크카운트:"+ p.apply(userId));
-		map.put("msg", (p.apply(userId)==0) ? "SUCCESS" : "FAIL");
-		return map;
-	}
-	
-	
-	@PostMapping("/login")
-	public Member login(@RequestBody Member param) {
-		Function<Member, Member> m = t->memberMapper.selectUserByIdPw(param);
-		System.out.println("000000"+param);
-		return m.apply(param);
-	}
-
 	
 	@GetMapping("/search")
 	public Member searchMemberById(@PathVariable String userId, @RequestBody Member param) {

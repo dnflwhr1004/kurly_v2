@@ -33,7 +33,7 @@ joinVue = {
         <br>
         <div class="row" style="text-align: center;">
             <div class="col-md-4" style="padding-top: 1%">*아이디</div>
-            <div class="col-md-4"><input id="userId" type="text" value maxlength="16" minlength="6"
+            <div class="col-md-4"><input id="userId" name="userId" type="text" value maxlength="16" minlength="6"
             label="id" style="width:100%;height:40px;border-radius: 5px;  border: 0.5px solid #D4D4D4;" placeholder="6자 이상의 영문 혹은 영문과 숫자를 조합">
             </div>
             <div class="col-md-4">

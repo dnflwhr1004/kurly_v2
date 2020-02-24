@@ -38,6 +38,26 @@ app = (()=>{
          e.preventDefault()
        $('#body').empty()
 		 $('#body').html(joinVue.joininfofo)
+		  $('#idVali').click(e=>{
+					e.preventDefault()
+				  	$.ajax({
+						url:'/members/'+$('#userId').val()+'/existId',
+						contentType:'application/json',
+						type:'GET',
+						data:JSON.stringify({
+							userId:$('#userId').val()
+						}),
+						success:d=>{
+							alert(JSON.stringify(d))
+							if(d.userId == $('#userId')){
+								alert('사용할 수 있는 아이디 입니다')
+								
+							}else {
+								alert('아이디 중복입니다')
+							}
+						}
+					  })
+					})
 		 $('#joinbtn').click(e=>{
 		  e.preventDefault()
 		  $.ajax({
@@ -56,9 +76,11 @@ app = (()=>{
            dataType:'json',
            contentType:'application/json',
 			  success: d=>{
+				 
 				  alert('join 성공: '+d)
 				  let asd = d.userId
 				  alert(JSON.stringify(asd))
+				  
 				if(asd ==null){
                $('#body').empty()
                $('#body').append(loginVue.loginVuego)
@@ -106,6 +128,9 @@ app = (()=>{
 				  alert('필수값을 입력해주세요')
 			  }
 		  })
+		  if(!$('#userId').val() || !$('#passwd').val()){
+			alert('아이디와 비밀번호를 입력해 주세요')
+		}
 	  })
 	  })
 	  

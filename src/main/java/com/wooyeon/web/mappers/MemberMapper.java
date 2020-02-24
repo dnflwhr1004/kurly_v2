@@ -11,7 +11,7 @@ public interface MemberMapper {
 	public void insert(Member member);
 	public Member selectById(String userId);
 	public Member selectUserByIdPw(Member member);
-	public int existId(String userId);
+	public String existId(String userId);
 	public String count();
 	public void update(Member member);
 	public void delete(String userId);

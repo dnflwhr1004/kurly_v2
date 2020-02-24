@@ -5,10 +5,10 @@
 <mapper namespace="com.wooyeon.web.mappers.MemberMapper">
 
 	
-   <select id="existId" resultType="int" parameterType="String" >
-    SELECT COUNT(*)
-    FROM users
-    WHERE userid LIKE #{userId}
+   <select id="existId" resultType="int">
+    select count(*)
+    from users
+    where userid LIKE #{userId}
    </select>
    
    <select id="selectNIP" resultType="com.wooyeon.web.domains.Member" parameterType="com.wooyeon.web.domains.Member">
@@ -25,15 +25,15 @@
    
    
     <select id="count" resultType="int" >
-    SELECT COUNT(*)
-    FROM users
+    select count(*)
+    from users
    </select>
    
    <select id="selectUserByIdPw" resultType="com.wooyeon.web.domains.Member" >
-    SELECT *
-    FROM users
-    WHERE userid LIKE #{userId}
-    AND passwd LIKE #{passwd}
+    select *
+    from users
+    where userid like #{userId}
+    and passwd like #{passwd}
    </select>
    
    <update id="update">
@@ -41,9 +41,9 @@
    </update>
   
   <delete id="delete" parameterType="String">
-  	DELETE 
-  	FROM member
-  	WHERE userid LIKE #{userId}
+  	delete 
+  	from member
+  	where userid like #{userId}
   </delete>
   
 </mapper>
