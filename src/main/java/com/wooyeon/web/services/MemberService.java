@@ -20,8 +20,10 @@ public class MemberService implements IService{
 	@Override public List<?> list(Object o){ return memberMapper.select((Pager) o);}
 	
 	public void create() { memberMapper.create();}
-	public String existId(String userId) {return memberMapper.existId(userId);}
+	public String existId(String userId) {System.out.println("service");return memberMapper.existId(userId);}
 	public Member selectUserByIdPw(Member member) {return memberMapper.selectUserByIdPw(member);}
 	public Member selectUserByName(Member member) {return memberMapper.selectUserByName(member);}
 	public Member login(Member param) {return memberMapper.selectUserByIdPw(param);};
+	public Member selectNIP(Member member) {return memberMapper.selectNIP(member);}
+	public List<?> listAllEmail(){return memberMapper.listAllEmail();}
 }

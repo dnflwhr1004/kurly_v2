@@ -63,15 +63,31 @@ public class MemberController {
 	
 	@GetMapping("/{userId}/existId")
 	public Messenger existId(@PathVariable String userId) {
-		return Messenger.SUCCESS;
+		Messenger answer = null;
+		String m = memberService.existId(userId);
+		System.out.println("DBanswer ::" +m);
+		
+		
+		if(m ==null) {
+			answer= Messenger.SUCCESS;
+		}else {
+			answer=Messenger.FAIL;
+		}
+		return answer;
 	}
-	/*
+	
 	@PostMapping("/selectNIP")
 	public Member selectNIP(@RequestBody Member member) {
 		System.out.println("controller"+member.getUserId());
 		return memberService.selectNIP(member);
 	}
 	
+	@GetMapping("/checkEmail")
+	 public List<?> selectAllEmail(){
+		 System.out.println("All member");
+		 return memberService.listAllEmail();
+	 }
+	/*
 	@GetMapping("/search")
 	public Member searchMemberById(@PathVariable String userId, @RequestBody Member param) {
 		Function<Member, Member> f= t-> memberMapper.selectUserByIdPw(param);

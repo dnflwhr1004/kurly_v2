@@ -5,8 +5,8 @@
 <mapper namespace="com.wooyeon.web.mappers.MemberMapper">
 
 	
-   <select id="existId" resultType="int">
-    select count(*)
+   <select id="existId" resultType="string" parameterType="string">
+    select userid
     from users
     where userid LIKE #{userId}
    </select>
@@ -45,5 +45,10 @@
   	from member
   	where userid like #{userId}
   </delete>
+  
+  <select id="listAllEmail" resultType="Map" >
+    SELECT email
+	FROM users
+   </select>
   
 </mapper>
