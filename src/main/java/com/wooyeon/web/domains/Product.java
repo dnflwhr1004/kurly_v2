@@ -13,5 +13,5 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class Product {
 
-	private String prodSeq, prodName, price, prodImg, saleUnit, prodInfo, category;
+	private String prodSeq, prodName, price, prodImg, saleUnit, prodInfo, category, recommand;
 }

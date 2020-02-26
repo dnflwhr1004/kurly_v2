@@ -50,7 +50,7 @@ homeVue = {
       <!--마켓컬리 배너1 끝-->
       
       <!--마켓컬리 배너2-->
-      <div style="background-color: #38165f; overflow: hidden; width: 100%">
+      <div style="background-color: #38165f; overflow: hidden; width: 100%;height:20rem;">
           <div class="row" > 
           <div class="col-md-5" style="text-align: right;padding-top: 5%; letter-spacing: -1px; ">
               <span style="color: #eee; font-size: 2rem;font-weight:500">마트와 작별하고 </span>  
@@ -80,46 +80,21 @@ homeVue = {
             
             <!-- 이상품 어떄요  slide  -->
               <div id="myCarousel" class="carousel slide" data-ride="carousel">
-                 <ol class="carousel-indicators">
+                 <ol id="slideVali" class="carousel-indicators">
                     <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
                     <li data-target="#myCarousel" data-slide-to="1"></li>
                   </ol>
                   <!-- 회전광고판 항목 -->
                   <div class="carousel-inner">
                     <div class="carousel-item active">
-                         <div id="pibody" class="row" >
-                            
-                            
+                         <div id="pibody_1" class="row" >
                             
                         </div>
                     </div>
                     <!--두번째 슬라이드 -->
                     <div class="carousel-item ">
-                        <div id="pibody" class="row" >
-                            <div id="pi1" class=" col-md-3" style="padding: 1%;">
-                                <img class="card-img-top img-zoom" src="https://img-cf.kurly.com/shop/data/goods/1579514501249l0.jpg" alt="">
-                                <span class="name"><a href="">[맛있닭] 다이어트 도시락 3종</a></span>
-                                <br>
-                                <span class="price"> 4,320원</span>
-                            </div>
-                            <div id="pi2" class=" col-md-3" style="padding: 1%; ">
-                                <img class="card-img-top img-zoom" src="https://img-cf.kurly.com/shop/data/goods/1475633955339l0.jpg" alt="">
-                                <span class="name"><a href="">MY FIRST 처음 만나는 진짜 식빵</a></span>
-                                <br>
-                                <span class="price"> 4,900원</span>
-                            </div>
-                            <div id="pi3" class=" col-md-3" style="padding: 1%;">
-                                <img class="card-img-top img-zoom" src="https://img-cf.kurly.com/shop/data/goods/1535621905610l0.jpg" alt="">
-                                <span class="name"><a href="">GAP 인증 실속 사과 한봉지 5~6입</a></span>
-                                <br>
-                                <span class="price"> 5,610원</span>
-                            </div>
-                            <div id="pi4" class=" col-md-3" style="padding: 1%;">
-                                <img class="card-img-top img-zoom" src="https://img-cf.kurly.com/shop/data/goods/1546580814429l0.jpg" alt="">
-                                <span class="name"><a href="">[루토사] 벨지안 와플</a></span>
-                                <br>
-                                <span class="price"> 6,320원</span>
-                            </div>
+                        <div id="pibody_2" class="row" >
+                           
                         </div>
                     </div>  
                   </div>

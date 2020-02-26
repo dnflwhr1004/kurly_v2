@@ -62,7 +62,10 @@ public class ProductController {
 	}
 	@GetMapping("/{id}")
 	public Product get(@PathVariable String id) {
-		return productService.detail(id);
+		System.out.println(">>> 2" + id);
+		Product p = productService.detail(id);
+		System.out.println(">>> 3"+p.toString());
+		return p;
 	}
 	
 	@GetMapping("/recommands")

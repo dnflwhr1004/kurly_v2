@@ -4,7 +4,7 @@ var app = app || {};
 app = (() => {
 	let init = () =>{
 		$('body').html(homeVue.home_nav).append(homeVue.home_main).append(homeVue.home_footer);
-			go_join(), go_login(), get_recommands(), goodshop()
+			go_join(), go_login(), get_recommands(), goodshop(),get_recommands_slide()
 	}
 	let run = () => {
 		import('/resources/js/vue/homeVue.js').then(() => {console.log('import homeVue')}),
@@ -131,17 +131,239 @@ app = (() => {
 
 		})
 	}
-	let get_recommands_slide = x => {
-		$.each(x, (i, j) => {
-			$(`<div id="pi1" class=" col-md-3" style="padding: 1%;">
+	let get_recommands_slide = d => {
+		$.each([d[0], d[1], d[2], d[3]], (i, j) => {
+			$(`<div id="pi${j.prodSeq}" class=" col-md-3" style="padding: 1%;">
+			                          <a href="" id="${j.prodSeq}">
                                 <img class="card-img-top img-zoom" src="${j.prodImg}" alt="">
                                 <span class="name">${j.prodName}</span>
                                 <br>
-								<span class="price">${j.price}</span></div>`).appendTo(`#pibody`)
+                                <span class="price">${j.price}</span></a>
+                            </div>`).appendTo(`#pibody_1`)
+			
 			.click( e=> {
 				e.preventDefault()
-							$.getJSON('/products/${j.prodSeq}', d=>{
+				alert('>>> 1')
+				$.getJSON(`/products/${j.prodSeq}`, d=>{
+					alert('>>> 4')
 								$(`#body`).empty()
+
+								$(`#body`).html(`<table style="border: 1px solid black;
+						height : 500px; width : 1300px;">
+				<tr>
+					<td style="border:1px solid black;
+								width:100px; text-align: center;">
+						<img style="height:500px; width:500px;" src ="${d.prodImg}">
+					</td>
+					<td style="border:1px solid black;
+								width:200px;">
+						<p>
+							<strong>
+								${j.prodName}
+							</strong><br>
+							<span>
+							</span>
+						</p>
+						<p>
+							<span>
+								${j.price}
+							</span>
+						</p>
+						<div class="info" style = "height:500px;
+						border-top: 1px solid #f4f4f4;">
+							<dl id="list">
+								<dt style="float: left;">
+									판매단위 
+								</dt>
+								<br> 
+								<dd style="float: center;">
+								${j.saleUnit}
+								</dd>
+							</dl>
+							<dl id="list">
+								<dt style="float: left;">
+									중량/용량
+								</dt>
+								<br> 
+								<dd style="float: center;">
+									400g x 2봉(세트)
+								</dd>
+							</dl>
+							<dl id="list">
+								<dt style="float: left;">
+									배송구분
+								</dt>
+								<br> 
+								<dd style="float: center;">
+									샛별배송 / 택배배송
+								</dd>
+							</dl>
+							<dl id="list">
+								<dt style="float: left;">
+									포장타입
+								</dt>
+								<br> 
+								<dd style="float: center;">
+									냉동/종이포장<br>
+									택배배송은 에코포장이 스티로폼으로 대체됩니다.
+								</dd>
+							</dl>
+							<dl id="list">
+								<dt style="float: left;">
+									알레르기정보 
+								</dt>
+								<br> 
+								<dd style="float: center;">
+									${j.prod_info}
+								</dd>
+							</dl>
+							<div class="option">
+								<div class="select" style="text-align: center;">
+											<span>
+												<button type="button" class="btn_delete">
+													<span>개수+-버튼</span>
+												</button>
+											</span>
+											<span>구매수량</span>
+								</div>
+							</div>
+							<br>
+							<div style="text-align: center;">
+								총 상품금액 : ${j.price}
+							</div>
+							<div style="text-align: right;">
+								<button type="button">장바구니 담기</button>
+							</div>
+						</div>
+					</td>
+				</tr>
+			</table>
+			<br>
+			<p>비슷한 상품</p>
+			<table style="border: 1px solid black;
+						height : 300px; width : 1500px;">
+				<tr>
+					<td id="" style="border:1px solid black;
+								width:300px; text-align: center;">
+								<button type="button" style="background : none; border: none;">1</button>
+						<div style="height:50px; width:200px; float:center;">
+							[올반]육즙가득 왕교자<br>
+							2종(2입구성)<br>
+							6,480원 
+						</div>		
+					</td>
+					<td id="" style="border:1px solid black;
+								width:300px; text-align: center;">2
+					<div style="height:50px; width:200px; float:center;">
+							[신앙촌]양초간장3종<br>
+							4,300원 
+						</div>		
+					</td>
+					<td id="" style="border:1px solid black;
+								width:300px; text-align: center;">3
+					<div style="height:50px; width:200px; float:center;">
+							[국내산100%]라온 현미유<br>
+							5,900원 
+						</div>		
+					</td>
+					<td id="" style="border:1px solid black;
+								width:300px; text-align: center;">4
+					<div style="height:50px; width:200px; float:center;">
+							[들국화]단무지 2종<br>
+							3,200원 
+						</div>		
+					</td>
+					<td id="" style="border:1px solid black;
+								width:300px; text-align: center;">4
+					<div style="height:50px; width:200px; float:center;">
+							[올반]우리밀 손만두 2종<br>
+							6,980원 
+						</div>		
+					</td>
+				</tr>
+			</table>
+			<ul class="tab" style="margin:0;
+						padding:0;
+					list-style-type: none;
+					">
+				<li id="sangse" style="margin: 0 0 0 0;
+							padding : 0 0 0 0;
+							border:0;
+							float: left;">
+					<a href="" style="position:relative;
+							top:1px;
+							width: 168px;
+							height:46px;
+							line-height: 46px;
+							text-align: center;
+							display: block;
+							color: #4c4c4c;
+							font-size: 14px;
+							font-family: noto sans;
+							background-color: #f0eef1;
+							border-bottom: 0;
+							border-left: none;">상품설명</a></li>
+				
+				<li id="reply" style="margin: 0 0 0 0;
+							padding : 0 0 0 0;
+							border:0;
+							float: left;">
+				<a href="" style="position:relative;
+							top:1px;
+							width: 168px;
+							height:46px;
+							line-height: 46px;
+							text-align: center;
+							display: block;
+							color: #4c4c4c;
+							font-size: 14px;
+							font-family: noto sans;
+							background-color: #f0eef1;
+							border-bottom: 0;
+							border-left: none;">고객후기</a></li>
+				
+			</ul>
+			<div id="tab1">
+				<table style="border: 1px solid black;
+							height : 250px; width : 1500px;">
+					<tr>
+						<td style="border:1px solid black;
+							width:200px; height:70px;">
+							<img style="height:200px; width:200px;" src="${j.prodImg}">
+						</td>
+						<td>
+							<div>
+								<strong>바삭하고 노릇한 전통의 맛 <br>
+								${j.prodName}
+								</strong>
+							</div>	
+							<div>
+								${j.prodInfo}
+							</div>
+						</td>
+					</tr>
+				</table>
+			</div>`)
+		}) // getJSON end
+			})
+		})
+
+		$.each([d[4], d[5], d[6], d[7]], (i, j) => {
+			$(`<div id="pi${j.prodSeq}" class=" col-md-3" style="padding: 1%;">
+			                          <a href="" id="${j.prodSeq}">
+                                <img class="card-img-top img-zoom" src="${j.prodImg}" alt="">
+                                <span class="name">${j.prodName}</span>
+                                <br>
+                                <span class="price">${j.price}</span></a>
+                            </div>`).appendTo(`#pibody_2`)
+			
+			.click( e=> {
+				e.preventDefault()
+				alert('>>> 1')
+				$.getJSON(`/products/${j.prodSeq}`, d=>{
+					alert('>>> 4')
+								$(`#body`).empty()
+
 								$(`#body`).html(`<table style="border: 1px solid black;
 						height : 500px; width : 1300px;">
 				<tr>
@@ -346,17 +568,6 @@ app = (() => {
 							
 		/* }
 
-							for (let a = 1; a < 5; a++) {
-								if (test == a) {
-									$(`#detailinfo1`).empty()
-									$().appendTo(`#detailinfo1 `)
-
-								} else {
-									test + 1
-								}
-								
-							}
-
 							$(`#reply`).click(e => {
 									e.preventDefault()
 									$.getJSON('/review/reviewlist',d=>{
@@ -406,16 +617,11 @@ app = (() => {
 	
 
 	let get_recommands = () => {
-		$.getJSON('/products/recommands', d => {
-			let d_1 = [d[0], d[1], d[2], d[3]]
-			let d_2 = [d[4], d[5], d[6], d[7]]
-			x = []
-			if(1 == 1){
-				x = d_1
-			}else{
-				x = d_2
-			} 	
-			get_recommands_slide(x)
+		$.getJSON(`/products/recommands`, d => {
+			
+			get_recommands_slide(d)	
+			
+			
 
 			
 		})

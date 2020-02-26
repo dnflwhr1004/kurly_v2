@@ -5,7 +5,7 @@ auth = (()=>{
 	let setContentView =()=>{
 
 	}
-	let join =json=>{
+	let join = json=>{
 			$.ajax({
 				url: '/members/',
 				type: 'POST',
@@ -91,7 +91,10 @@ auth = (()=>{
 							$('#gologin_btn').empty()
 							$('#gologin_btn').html('<a id="logout" href="">로그아웃</a>').append('<a id="mypage" href="">마이페이지</a>')
 							details()
+							
 						}
+
+					
 						$('#mypage').click(e => {
 							alert('mypage')
 							e.preventDefault()
