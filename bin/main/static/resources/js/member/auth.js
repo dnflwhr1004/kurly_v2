@@ -90,7 +90,7 @@ auth = (()=>{
 							$('#body').append(homeVue.home_main);
 							$('#gologin_btn').empty()
 							$('#gologin_btn').html('<a id="logout" href="">로그아웃</a>').append('<a id="mypage" href="">마이페이지</a>')
-							details()
+							get_recommands_slide()
 							
 						}
 

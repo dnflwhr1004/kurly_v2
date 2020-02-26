@@ -118,8 +118,8 @@ homeVue = {
                <h3 style="text-align: center;color: #333;font-family: noto sans;"> 이벤트 소식&nbsp;></h3>
                 <div class="row" style="text-align: center;">
                     <div id="pi1" class="col-md-4" >
-                        <img class="card-img-top img-zoom" src="https://img-cf.kurly.com/shop/data/main/3/pc_img_1581670796.jpg" alt="">
-                        <span class="name" ><a href="">티 & 디저트 최대 20% 할인</a></span>
+                        <img class="card-img-top img-zoom" src="/resources/img/pc_img_1582274651.jpg" alt="">
+                        <span class="name" ><a href=""> DAN .더닐크팩토리 최대 15% 할인</a></span>
                         <br>
                         <span class="price" style="color: #999;"> 5,610원</span>
                     </div>

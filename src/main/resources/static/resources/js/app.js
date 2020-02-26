@@ -2,21 +2,21 @@
 var app = app || {};
 
 app = (() => {
-	let init = () =>{
+	let init = () => {
 		$('body').html(homeVue.home_nav).append(homeVue.home_main).append(homeVue.home_footer);
-			go_join(), go_login(), get_recommands(), goodshop(),get_recommands_slide()
+		go_join(), go_login(), get_recommands(), goodshop(), get_recommands_slide()
 	}
 	let run = () => {
-		import('/resources/js/vue/homeVue.js').then(() => {console.log('import homeVue')}),
-		import('/resources/js/vue/joinVue.js').then(() => {console.log('import joinVue')}),
-		import('/resources/js/vue/loginVue.js').then(() => {console.log('import loginVue')}),
-		import('/resources/js/vue/detailVue.js').then(() => {console.log('import detailVue')}),
-		import('/resources/js/vue/goodshopVue.js').then(() => {console.log('import goodshopVue')}),
-		import('/resources/js/vue/idsearchVue.js').then(() => {console.log('import idsearchVue')}),
-		import('/resources/js/vue/pwsearchVue.js').then(() => {console.log('import pwsearchVue')}),
-		import('/resources/js/vue/mypageVue.js').then(() => {console.log('import mypageVue')}),
-		import('/resources/js/vue/mypageUpdateVue.js').then(()=>{console.log('import mypageUpdateVue')}),
-		import('/resources/js/member/auth.js').then(()=>{console.log('import auth')})
+		import('/resources/js/vue/homeVue.js').then(() => { console.log('import homeVue') }),
+			import('/resources/js/vue/joinVue.js').then(() => { console.log('import joinVue') }),
+			import('/resources/js/vue/loginVue.js').then(() => { console.log('import loginVue') }),
+			import('/resources/js/vue/detailVue.js').then(() => { console.log('import detailVue') }),
+			import('/resources/js/vue/goodshopVue.js').then(() => { console.log('import goodshopVue') }),
+			import('/resources/js/vue/idsearchVue.js').then(() => { console.log('import idsearchVue') }),
+			import('/resources/js/vue/pwsearchVue.js').then(() => { console.log('import pwsearchVue') }),
+			import('/resources/js/vue/mypageVue.js').then(() => { console.log('import mypageVue') }),
+			import('/resources/js/vue/mypageUpdateVue.js').then(() => { console.log('import mypageUpdateVue') }),
+			import('/resources/js/member/auth.js').then(() => { console.log('import auth') })
 		init()
 	}
 	let go_join = () => {
@@ -44,7 +44,7 @@ app = (() => {
 			})
 			$('#joinbtn').click(e => {
 				e.preventDefault()
-				
+
 				auth.join({
 					userId: $('#userId').val(),
 					userName: $('#userName').val(),
@@ -70,26 +70,79 @@ app = (() => {
 			alert('gologin')
 			$('#body').empty()
 			$('#body').html(loginVue.loginVuego)
-
+			
 			$('#search_id').click(e => {
 				e.preventDefault()
 				alert('search_id')
 				$('#body').empty()
 				$('#body').html(idsearchVue.idsearchVue_go)
+				$('#findById').click(e => {
+					e.preventDefault()
+					alert('findById');
+					console.log('email::' + $('#email').val() + 'userName::' + $('#userName').val())
+					$.ajax({
+						url: '/members/searchUserById',
+						type: 'POST',
+						data: JSON.stringify({
+							email: $('#email').val(),
+							userName: $('#userName').val()
+						}),
+						dataType: 'json',
+						contentType: 'application/json',
+						success: d => {
+
+							let userId = d.userId
+							alert('find id success ::: ' + userId)
+								$('#body').empty()
+								$('#body').html(loginVue.loginVuego)
+						},
+						error: e => {
+							alert('잘못된 id 또는 pw 입니다')
+						}
+					})
+				})
 			})
 			$('#search_pw').click(e => {
 				e.preventDefault()
 				alert('search_pw')
 				$('#body').empty()
 				$('#body').html(pwsearchVue.pwsearchVue_go)
+				$('#searchPw').click(e => {
+					/*alert('findsearchPwsearchPwsearchPw');*/
+					console.log('username::' + $('#userName').val() + 'userID::' + $('#userId').val() + 'useremail::' + $('#email').val())
+					$.ajax({
+						url: '/members/searchPassword',
+						type: 'POST',
+						data: JSON.stringify({
+							email: $('#email').val(),
+							userName: $('#userName').val(),
+							userId: $('#userId').val()
+
+						}),
+						dataType: 'json',
+						contentType: 'application/json',
+						success: d => {
+
+							let passwd = d.passwd
+							alert('귀하의 비밀번호는  ' + passwd + '  입니다')
+								$('#body').empty()
+								$('#body').html(loginVue.loginVuego)
+						},
+						error: e => {
+							alert('잘못된 id 또는 pw 입니다')
+						}
+					})
+				})
 			})
 			$('#loginbtn').click(e => {
 				e.preventDefault()
-				
+
 				auth.login({
-						userId: $('#userId').val(),
-						passwd: $('#passwd').val()
-					})
+					userId: $('#userId').val(),
+					passwd: $('#passwd').val()
+				})
+				
+				
 			})
 
 			$('#adminbtn').click(e => {
@@ -140,15 +193,15 @@ app = (() => {
                                 <br>
                                 <span class="price">${j.price}</span></a>
                             </div>`).appendTo(`#pibody_1`)
-			
-			.click( e=> {
-				e.preventDefault()
-				alert('>>> 1')
-				$.getJSON(`/products/${j.prodSeq}`, d=>{
-					alert('>>> 4')
-								$(`#body`).empty()
 
-								$(`#body`).html(`<table style="border: 1px solid black;
+				.click(e => {
+					e.preventDefault()
+					alert('>>> 1')
+					$.getJSON(`/products/${j.prodSeq}`, d => {
+						alert('>>> 4')
+						$(`#body`).empty()
+
+						$(`#body`).html(`<table style="border: 1px solid black;
 						height : 500px; width : 1300px;">
 				<tr>
 					<td style="border:1px solid black;
@@ -214,7 +267,7 @@ app = (() => {
 								</dt>
 								<br> 
 								<dd style="float: center;">
-									${j.prod_info}
+									${j.prodInfo}
 								</dd>
 							</dl>
 							<div class="option">
@@ -344,8 +397,8 @@ app = (() => {
 					</tr>
 				</table>
 			</div>`)
-		}) // getJSON end
-			})
+					}) // getJSON end
+				})
 		})
 
 		$.each([d[4], d[5], d[6], d[7]], (i, j) => {
@@ -356,15 +409,15 @@ app = (() => {
                                 <br>
                                 <span class="price">${j.price}</span></a>
                             </div>`).appendTo(`#pibody_2`)
-			
-			.click( e=> {
-				e.preventDefault()
-				alert('>>> 1')
-				$.getJSON(`/products/${j.prodSeq}`, d=>{
-					alert('>>> 4')
-								$(`#body`).empty()
 
-								$(`#body`).html(`<table style="border: 1px solid black;
+				.click(e => {
+					e.preventDefault()
+					alert('>>> 1')
+					$.getJSON(`/products/${j.prodSeq}`, d => {
+						alert('>>> 4')
+						$(`#body`).empty()
+
+						$(`#body`).html(`<table style="border: 1px solid black;
 						height : 500px; width : 1300px;">
 				<tr>
 					<td style="border:1px solid black;
@@ -430,7 +483,7 @@ app = (() => {
 								</dt>
 								<br> 
 								<dd style="float: center;">
-									${j.prod_info}
+									${j.prodInfo}
 								</dd>
 							</dl>
 							<div class="option">
@@ -490,7 +543,7 @@ app = (() => {
 						</div>		
 					</td>
 					<td id="" style="border:1px solid black;
-								width:300px; text-align: center;">4
+								width:300px; text-align: center;">5
 					<div style="height:50px; width:200px; float:center;">
 							[올반]우리밀 손만두 2종<br>
 							6,980원 
@@ -560,70 +613,70 @@ app = (() => {
 					</tr>
 				</table>
 			</div>`)
-		}) // getJSON end
-			})
+					}) // getJSON end
+				})
 		})
 	}
-					
-							
-		/* }
 
-							$(`#reply`).click(e => {
-									e.preventDefault()
-									$.getJSON('/review/reviewlist',d=>{
-										let asd = d
-										alert(JSON.stringify(asd))
-								$(`<div id="tab2">
-									<table style="border: 1px solid black;
-												height : 250px; width : 1500px;">
-										<tr>
-											<td id="wrr" style="border:1px solid black;
-												width:1500px; height:250px;">
-												${asd[i].update_date} ${asd[i].comments} 
-												<div>
-													<input id="writeRev" type="text" style="width:70%; height:50px;">
-													<button id="gowrite" style="width: 5%; height:50px; background-color: #5f0080;color: #fff;border-radius: 5px;">확인</button>
-												</div>
-											</td>
-										</tr>
-									</table>
-								</div>`).appendTo(`#tab1`)
-										$(`#gowrite`).click(e=>{
-											e.preventDefault()
-											alert('댓글입력')
-											$.ajax({
-												url:'/review/',
-												type : 'POST',
-												data:JSON.stringify({
-													comments : $('#comments').val()
-												}),
-												dataType: 'json',
-												contentType:'application/json',
-												success : d=>{
-													let asd = d.comments
-													alert(JSON.stringify(asd))
-												},
-												error : e=>{
-													alert('댓글입력 오류')
-												}
-											})
-								
+
+	/* }
+
+						$(`#reply`).click(e => {
+								e.preventDefault()
+								$.getJSON('/review/reviewlist',d=>{
+									let asd = d
+									alert(JSON.stringify(asd))
+							$(`<div id="tab2">
+								<table style="border: 1px solid black;
+											height : 250px; width : 1500px;">
+									<tr>
+										<td id="wrr" style="border:1px solid black;
+											width:1500px; height:250px;">
+											${asd[i].update_date} ${asd[i].comments} 
+											<div>
+												<input id="writeRev" type="text" style="width:70%; height:50px;">
+												<button id="gowrite" style="width: 5%; height:50px; background-color: #5f0080;color: #fff;border-radius: 5px;">확인</button>
+											</div>
+										</td>
+									</tr>
+								</table>
+							</div>`).appendTo(`#tab1`)
+									$(`#gowrite`).click(e=>{
+										e.preventDefault()
+										alert('댓글입력')
+										$.ajax({
+											url:'/review/',
+											type : 'POST',
+											data:JSON.stringify({
+												comments : $('#comments').val()
+											}),
+											dataType: 'json',
+											contentType:'application/json',
+											success : d=>{
+												let asd = d.comments
+												alert(JSON.stringify(asd))
+											},
+											error : e=>{
+												alert('댓글입력 오류')
+											}
 										})
+							
 									})
 								})
-						})
-				} 
-	})*/
-	
+							})
+					})
+			} 
+})*/
+
 
 	let get_recommands = () => {
 		$.getJSON(`/products/recommands`, d => {
-			
-			get_recommands_slide(d)	
-			
-			
 
-			
+			get_recommands_slide(d)
+
+
+
+
 		})
 	}
 

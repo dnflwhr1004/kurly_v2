@@ -87,6 +87,20 @@ public class MemberController {
 		 System.out.println("All member");
 		 return memberService.listAllEmail();
 	 }
+	
+	@PostMapping("/searchUserById")
+	public Member searchUserById(@RequestBody Member param) {
+		System.out.println("email::" +param.getEmail() + "  name::"+param.getUserName());
+		System.out.println(">>>>" + memberService.selectUserByName(param));
+		return memberService.selectUserByName(param);
+	}
+	
+	@PostMapping("/searchPassword")
+	public Member searchPassword(@RequestBody Member member) {
+		System.out.println("/searchPassword++ userId::"+member.getUserId()+"userName::"+member.getUserName()+"userEmail:::"+member.getEmail());
+		System.out.println("dskjflsjkdlsjfslk");
+		return memberService.selectUserByIdPw(member);
+	}
 	/*
 	@GetMapping("/search")
 	public Member searchMemberById(@PathVariable String userId, @RequestBody Member param) {
