@@ -24,8 +24,13 @@
 		VALUES (#{prod_name},#{price},#{prod_img},#{sale_unit},#{prod_info},#{category})
 	</insert>
 	
-	<select id="select" resultType="map">
+	<select id="select" resultType="com.wooyeon.web.domains.Product">
 		select *
 		from product
+	</select>
+	<select id="selectRecommand" resultType="com.wooyeon.web.domains.Product">
+		select *
+		from product
+		where recommand like 1
 	</select>
 </mapper>

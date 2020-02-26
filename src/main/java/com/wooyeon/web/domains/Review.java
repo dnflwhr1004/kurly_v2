@@ -13,6 +13,6 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class Review {
 	
-	private String artSeq, ProdSeq, comments, update_date, userid;
+	private String artSeq, ProdSeq, comments, updateDate, userid;
 	
 }

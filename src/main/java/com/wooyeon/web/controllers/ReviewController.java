@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.wooyeon.web.domains.Review;
+import com.wooyeon.web.enums.Messenger;
 import com.wooyeon.web.generics.Box;
 import com.wooyeon.web.generics.Trunk;
 import com.wooyeon.web.mappers.ReviewMapper;
@@ -44,20 +45,19 @@ public class ReviewController {
 	
 	@GetMapping("/reviewlist")
 	public List<?> reviewlist(Review review) {
+		System.out.println("review>>>>" + reviewService.list(review));
 		return reviewService.list(review);
 	}
 	
-	/*
 	@PostMapping("/")
-	public Map<?, ?> write(@RequestBody Review param) {
-		
-		Consumer<Review> r = t-> reviewMapper.insert(param);
-		r.accept(param);
-		Supplier<String> s =()->reviewMapper.count()+"";
-		trunk.put(Arrays.asList("msg","count"),
-				Arrays.asList("SUCCESS", s.get()));
-		return trunk.get();
+	public Messenger write(@RequestBody Review param) {
+		printer.accept("write들어옴 : " + param.toString());
+		reviewService.save(param);
+		return Messenger.SUCCESS;
 	} 
+	
+	/*
+	
 	
 	@GetMapping("/count")
 	

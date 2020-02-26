@@ -13,6 +13,7 @@ public interface ReviewMapper {
 	public void insert(Review review);
 	public void update(Review review);
 	public void delete(String artSeq);
+	public Review selectByReview(String comments);
 	public String count();
 	public List<?> select(Review review);
 }

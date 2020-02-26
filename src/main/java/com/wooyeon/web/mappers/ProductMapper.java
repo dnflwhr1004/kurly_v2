@@ -16,6 +16,7 @@ public interface ProductMapper {
 	public Product selectByProd(String prod_name);
 	public String count();
 	public List<?> select(Product product);
+	public Product[] selectRecommand();
 	
 	
 }

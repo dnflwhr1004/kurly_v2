@@ -2,7 +2,11 @@
 var app = app || {};
 
 app = (() => {
-	let init = () => {
+	let init = () =>{
+
+	}
+	let run = () => {
+		init()
 
 		import('/resources/js/vue/homeVue.js').then(() => {
 			$('body').html(homeVue.home_nav).append(homeVue.home_main).append(homeVue.home_footer);
@@ -30,11 +34,10 @@ app = (() => {
 			}),
 		    import('/resources/js/vue/mypageUpdateVue.js').then(()=>{
 
-      })
-	}
-	let run = () => {
-		init()
-	}
+			}),
+
+			import('/resources/js/member/auth.js').then(()=>{ member = auth})
+			}
 
 	let gogojoin = () => {
 		$('#gojoin').click(e => {
@@ -61,73 +64,16 @@ app = (() => {
 			})
 			$('#joinbtn').click(e => {
 				e.preventDefault()
-				$.ajax({
-					url: '/members/',
-					type: 'POST',
-					data: JSON.stringify({
-						userId: $('#userId').val(),
-						userName: $('#userName').val(),
-						gender: $(`input[name="radio_btn"]:checked`).val(),
-						passwd: $('#passwd').val(),
-						email: $('#email').val(),
-						mobile: $('#mobile').val(),
-						birthday: $('#birthday').val(),
-						addr: $('#sample6_address').val() + " " + $('#sample6_detailAddress').val()
-					}),
-					dataType: 'json',
-					contentType: 'application/json',
-					success: d => {
-
-						alert('join 성공: ' + d)
-						let asd = d.userId
-						alert(JSON.stringify(asd))
-
-						if (asd == null) {
-							$('#body').empty()
-							$('#body').append(loginVue.loginVuego)
-							$('#loginbtn').click(e => {
-								e.preventDefault()
-								$.ajax({
-									url: '/members/login',
-									type: 'POST',
-									data: JSON.stringify({
-										userId: $('#userId').val(),
-										passwd: $('#passwd').val()
-									}),
-									dataType: 'json',
-									contentType: 'application/json',
-									success: d => {
-										let asd = d.userId
-										alert(JSON.stringify(asd))
-										sessionStorage.setItem("userid", asd)
-										sessionStorage.setItem("passwd", d.passwd)
-										console.log(sessionStorage.getItem("userid"))
-										console.log(sessionStorage.getItem("passwd"))
-
-										if (asd == null) {
-											$('#body').empty()
-											$('#body').append(homeVue.home_main);
-										} else {
-											$('#body').empty()
-											$('#body').append(homeVue.home_main);
-											$('#gologin_btn').empty()
-											$('#gologin_btn').html('<a id="logout" href="">로그아웃</a>').append('<a id="mypage" href="">마이페이지</a>')
-										}
-
-
-									},
-									error: e => {
-										alert('잘못된 id 또는 pw 입니다')
-									}
-								})
-							})
-						} else {
-							alert('가입실패')
-						}
-					},
-					error: e => {
-						alert('필수값을 입력해주세요')
-					}
+				
+				auth.join({
+					userId: $('#userId').val(),
+					userName: $('#userName').val(),
+					gender: $(`input[name="radio_btn"]:checked`).val(),
+					passwd: $('#passwd').val(),
+					email: $('#email').val(),
+					mobile: $('#mobile').val(),
+					birthday: $('#birthday').val(),
+					addr: $('#sample6_address').val() + " " + $('#sample6_detailAddress').val()
 				})
 				if (!$('#userId').val() || !$('#passwd').val()) {
 					alert('아이디와 비밀번호를 입력해 주세요')
@@ -159,125 +105,11 @@ app = (() => {
 			})
 			$('#loginbtn').click(e => {
 				e.preventDefault()
-				$.ajax({
-					url: '/members/login',
-					type: 'POST',
-					data: JSON.stringify({
+				
+				auth.login({
 						userId: $('#userId').val(),
 						passwd: $('#passwd').val()
-					}),
-					dataType: 'json',
-					contentType: 'application/json',
-					success: d => {
-						let asd = d.userId
-						alert(JSON.stringify(asd))
-						sessionStorage.setItem("userid", asd)
-						sessionStorage.setItem("passwd", d.passwd)
-						console.log(sessionStorage.getItem("userid"))
-						console.log(sessionStorage.getItem("passwd"))
-
-						if (asd == null) {
-							$('#body').empty()
-							$('#body').append(homeVue.home_main);
-						} else {
-							$('#body').empty()
-							$('#body').append(homeVue.home_main);
-							$('#gologin_btn').empty()
-							$('#gologin_btn').html('<a id="logout" href="">로그아웃</a>').append('<a id="mypage" href="">마이페이지</a>')
-						}
-						$('#mypage').click(e => {
-							alert('mypage')
-							e.preventDefault()
-							$('#body').empty()
-							$('#body').html(mypageVue.mypageVuego)
-							console.log('ghkrdlsdf::' + sessionStorage.getItem("userid"))
-							$.ajax({
-								url: '/members/selectNIP',
-								type: 'POST',
-								data: JSON.stringify({
-									userId: sessionStorage.getItem("userid"),
-									passwd: sessionStorage.getItem("passwd")
-								}),
-								dataType: 'json',
-								contentType: 'application/json',
-								success: d => {
-									alert('성공이냐')
-									$('#userName').text(d.userName)
-									$('#userid').text(d.userId)
-
-									$('#validpasswd').click(e => {
-										e.preventDefault()
-										if ($('#userpasswd').val() == d.passwd) {
-											alert('성공' + d.passwd)
-											$('#body').empty()
-											$('#body').html(mypageUpdateVue.maypageUpdateVuego)
-											$('#userName').text(d.userName);
-											$('#userId').attr('value', d.userId);
-											$('#usrName').attr('placeholder', d.userName);
-											$('#usrEmail').attr('placeholder', d.email)
-											$('#usrMobile').attr('placeholder', d.mobile)
-											/**  check before update email  */
-											$('#emailVali').click(e => {
-												e.preventDefault()
-												alert('email validation!!')
-												if ($('#usrEmail').val() == "" || $('#usrEmail').val() == d.email) {
-													alert('no changes user email')
-													$('#usrEmail').val(d.email);
-													console.log($('#usrEmail').val())
-												} else {
-													alert('user changed email')
-													/** email overlap check */
-													$.getJSON('/member/checkEmail', d => {
-														console.log(d)
-														console.log(d.length)
-														console.log(d[0].valueOf())
-														console.log(d[0].email)
-														for (var i = 0; i < d.length; i++) {
-															console.log('i value::' + i);
-															console.log('ID check!! :' + d[i].email)
-															if ($('#usrEmail').val() == d[i].email) {
-																alert('이미 존재하는 아이디 입니다.')
-																return false;
-															} else {
-
-																alert('사용가능한 아이디 입니다.')
-															}
-														}
-
-													})
-
-												}
-											})
-											/**  check before update email end  */
-											/**delete account */
-											$('#deleteAccount').click(e => {
-												e.preventDefault()
-												alert('회원탈퇴')
-											})
-											/**delete account end*/
-											/**update user Detail */
-											$('#updateDetail').click(e => {
-												e.preventDefault()
-												alert('회원 정보 수정 되었습니다.')
-											})
-											/**update user Detail end */
-										} else {
-											alert('비밀번호가 일치하지 않습니다')
-										}
-									})
-
-								},
-								error: e => {
-									alert('실패냐')
-								}
-							})
-						})
-					},
-					error: e => {
-						alert('잘못된 id 또는 pw 입니다')
-					}
-				})
-
+					})
 			})
 
 			$('#adminbtn').click(e => {
@@ -319,41 +151,29 @@ app = (() => {
 
 		})
 	}
-
-	let details = () => {
-		$.getJSON('/product/prodlist', d => {
-			let asd = d
-
-			$.each(asd, (i, j) => {
-				let test = asd[i].prodseq
-				if (test < 5) {
-					$(`<div id="pi1" class=" col-md-3" style="padding: 1%;">
-                                <img class="card-img-top img-zoom" src="${j.prod_img}" alt="">
-                                <span class="name"><a id="${j.prodseq}" href="">${j.prod_name}</a></span>
+	let getRecommandsSlide = x => {
+		$.each(x, (i, j) => {
+			$(`<div id="pi1" class=" col-md-3" style="padding: 1%;">
+                                <img class="card-img-top img-zoom" src="${j.prodImg}" alt="">
+                                <span class="name">${j.prodName}</span>
                                 <br>
-                                <span class="price">${j.price}</span>
-							</div>`).appendTo(`#pibody`)
-						.click(e => {
-							e.preventDefault()
-							alert('asdasdasdadasdsa')
-							$(`#body`).empty()
-							$(`#body`).html(detailVue.detailinfofo1)
-
-							for (let a = 1; a < 20; a++) {
-								if (test == a) {
-									$(`#detailinfo1`).empty()
-									$(`<table style="border: 1px solid black;
+								<span class="price">${j.price}</span></div>`).appendTo(`#pibody`)
+			.click( e=> {
+				e.preventDefault()
+							$.getJSON('/products/${j.prodSeq}', d=>{
+								$(`#body`).empty()
+								$(`#body`).html(`<table style="border: 1px solid black;
 						height : 500px; width : 1300px;">
 				<tr>
 					<td style="border:1px solid black;
 								width:100px; text-align: center;">
-						<img style="height:500px; width:500px;" src ="${j.prod_img}">
+						<img style="height:500px; width:500px;" src ="${d.prodImg}">
 					</td>
 					<td style="border:1px solid black;
 								width:200px;">
 						<p>
 							<strong>
-								${j.prod_name}
+								${j.prodName}
 							</strong><br>
 							<span>
 							</span>
@@ -371,7 +191,7 @@ app = (() => {
 								</dt>
 								<br> 
 								<dd style="float: center;">
-								${j.sale_unit}
+								${j.saleUnit}
 								</dd>
 							</dl>
 							<dl id="list">
@@ -523,45 +343,113 @@ app = (() => {
 					<tr>
 						<td style="border:1px solid black;
 							width:200px; height:70px;">
-							<img style="height:200px; width:200px;" src="${j.prod_img}">
+							<img style="height:200px; width:200px;" src="${j.prodImg}">
 						</td>
 						<td>
 							<div>
 								<strong>바삭하고 노릇한 전통의 맛 <br>
-								${j.prod_name}
+								${j.prodName}
 								</strong>
 							</div>	
 							<div>
-								${j.prod_info}
+								${j.prodInfo}
 							</div>
 						</td>
 					</tr>
 				</table>
-			</div>`).appendTo(`#detailinfo1 `)
-								} else {
-									test + 1
-								}
-								$(`#reviews`).click(e => {
-									e.preventDefault()
-
-								})
-							}
-						})
-				}
+			</div>`)
+		}) // getJSON end
 			})
 		})
 	}
+					
+							
+		/* }
 
+							for (let a = 1; a < 5; a++) {
+								if (test == a) {
+									$(`#detailinfo1`).empty()
+									$().appendTo(`#detailinfo1 `)
 
+								} else {
+									test + 1
+								}
+								
+							}
 
-	let goodshop = () => {
+							$(`#reply`).click(e => {
+									e.preventDefault()
+									$.getJSON('/review/reviewlist',d=>{
+										let asd = d
+										alert(JSON.stringify(asd))
+								$(`<div id="tab2">
+									<table style="border: 1px solid black;
+												height : 250px; width : 1500px;">
+										<tr>
+											<td id="wrr" style="border:1px solid black;
+												width:1500px; height:250px;">
+												${asd[i].update_date} ${asd[i].comments} 
+												<div>
+													<input id="writeRev" type="text" style="width:70%; height:50px;">
+													<button id="gowrite" style="width: 5%; height:50px; background-color: #5f0080;color: #fff;border-radius: 5px;">확인</button>
+												</div>
+											</td>
+										</tr>
+									</table>
+								</div>`).appendTo(`#tab1`)
+										$(`#gowrite`).click(e=>{
+											e.preventDefault()
+											alert('댓글입력')
+											$.ajax({
+												url:'/review/',
+												type : 'POST',
+												data:JSON.stringify({
+													comments : $('#comments').val()
+												}),
+												dataType: 'json',
+												contentType:'application/json',
+												success : d=>{
+													let asd = d.comments
+													alert(JSON.stringify(asd))
+												},
+												error : e=>{
+													alert('댓글입력 오류')
+												}
+											})
+								
+										})
+									})
+								})
+						})
+				} 
+	})*/
+	
+
+	/* let getRecommands = () => {
+		$.getJSON('/products/', d => {
+			let d_1 = [d[0], d[1], d[2], d[3]]
+			let d_2 = [d[4], d[5], d[6], d[7]]
+			x = []
+			if(1 == 1){
+				x = d_1
+			}else{
+				x = d_2
+			} 	
+			getRecommandsSlide(x)
+
+			
+		})
+	} */
+
+	/* let goodshop = () => {
 		$('#good_shop').click(e => {
 			e.preventDefault()
 			$('#body').html(goodshopVue.goodshopVue_body)
 		})
-	}
+	} */
 
 
 
 	return { run }
 })()
+
