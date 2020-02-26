@@ -44,13 +44,13 @@ public class ProductController {
 		return Messenger.SUCCESS;
 	}
 	
-	@PutMapping("/{prodSeq}")
+	@PutMapping("/{id}")
 	public Messenger update(@RequestBody Product param) {
 		productService.edit(param);
 		return Messenger.SUCCESS;
 	}
 	
-	@DeleteMapping("/{prodSeq}")
+	@DeleteMapping("/{id}")
 	public Messenger delete(@RequestBody Product param) {
 		productService.remove(param);
 		return Messenger.SUCCESS;
@@ -67,6 +67,7 @@ public class ProductController {
 	
 	@GetMapping("/recommands")
 	public Product[] getRecommands() {
+		System.out.println("recomands");
 		return productService.listRecommand();
 	}
 	

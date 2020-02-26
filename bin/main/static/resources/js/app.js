@@ -3,43 +3,23 @@ var app = app || {};
 
 app = (() => {
 	let init = () =>{
-
+		$('body').html(homeVue.home_nav).append(homeVue.home_main).append(homeVue.home_footer);
+			go_join(), go_login(), get_recommands(), goodshop()
 	}
 	let run = () => {
+		import('/resources/js/vue/homeVue.js').then(() => {console.log('import homeVue')}),
+		import('/resources/js/vue/joinVue.js').then(() => {console.log('import joinVue')}),
+		import('/resources/js/vue/loginVue.js').then(() => {console.log('import loginVue')}),
+		import('/resources/js/vue/detailVue.js').then(() => {console.log('import detailVue')}),
+		import('/resources/js/vue/goodshopVue.js').then(() => {console.log('import goodshopVue')}),
+		import('/resources/js/vue/idsearchVue.js').then(() => {console.log('import idsearchVue')}),
+		import('/resources/js/vue/pwsearchVue.js').then(() => {console.log('import pwsearchVue')}),
+		import('/resources/js/vue/mypageVue.js').then(() => {console.log('import mypageVue')}),
+		import('/resources/js/vue/mypageUpdateVue.js').then(()=>{console.log('import mypageUpdateVue')}),
+		import('/resources/js/member/auth.js').then(()=>{console.log('import auth')})
 		init()
-
-		import('/resources/js/vue/homeVue.js').then(() => {
-			$('body').html(homeVue.home_nav).append(homeVue.home_main).append(homeVue.home_footer);
-			gogojoin(), gogologin(), details(), goodshop()
-		}),
-			import('/resources/js/vue/joinVue.js').then(() => {
-
-			}),
-			import('/resources/js/vue/loginVue.js').then(() => {
-			}),
-			import('/resources/js/vue/detailVue.js').then(() => {
-
-			}),
-			import('/resources/js/vue/goodshopVue.js').then(() => {
-
-			}),
-			import('/resources/js/vue/idsearchVue.js').then(() => {
-
-			}),
-			import('/resources/js/vue/pwsearchVue.js').then(() => {
-
-			}),
-			import('/resources/js/vue/mypageVue.js').then(() => {
-
-			}),
-		    import('/resources/js/vue/mypageUpdateVue.js').then(()=>{
-
-			}),
-
-			import('/resources/js/member/auth.js').then(()=>{ member = auth})
-			}
-
-	let gogojoin = () => {
+	}
+	let go_join = () => {
 		$('#gojoin').click(e => {
 			e.preventDefault()
 
@@ -84,7 +64,7 @@ app = (() => {
 
 	}
 
-	let gogologin = () => {
+	let go_login = () => {
 		$('#gologin').click(e => {
 			e.preventDefault()
 			alert('gologin')
@@ -151,7 +131,7 @@ app = (() => {
 
 		})
 	}
-	let getRecommandsSlide = x => {
+	let get_recommands_slide = x => {
 		$.each(x, (i, j) => {
 			$(`<div id="pi1" class=" col-md-3" style="padding: 1%;">
                                 <img class="card-img-top img-zoom" src="${j.prodImg}" alt="">
@@ -425,8 +405,8 @@ app = (() => {
 	})*/
 	
 
-	/* let getRecommands = () => {
-		$.getJSON('/products/', d => {
+	let get_recommands = () => {
+		$.getJSON('/products/recommands', d => {
 			let d_1 = [d[0], d[1], d[2], d[3]]
 			let d_2 = [d[4], d[5], d[6], d[7]]
 			x = []
@@ -435,18 +415,18 @@ app = (() => {
 			}else{
 				x = d_2
 			} 	
-			getRecommandsSlide(x)
+			get_recommands_slide(x)
 
 			
 		})
-	} */
+	}
 
-	/* let goodshop = () => {
+	let goodshop = () => {
 		$('#good_shop').click(e => {
 			e.preventDefault()
 			$('#body').html(goodshopVue.goodshopVue_body)
 		})
-	} */
+	}
 
 
 
