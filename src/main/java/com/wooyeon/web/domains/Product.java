@@ -13,7 +13,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class Product {
 
-	private String prodSeq, prodName, price, prodImg, saleUnit, prodInfo, category, recommand;
+	private String prodSeq, prodName, price, prodImg, saleUnit, prodInfo, category, recommand, prodVolume, packingType,totalCount;
 
 	public String getProdSeq() {
 		return prodSeq;
@@ -77,6 +77,30 @@ public class Product {
 
 	public void setRecommand(String recommand) {
 		this.recommand = recommand;
+	}
+
+	public String getProdVolume() {
+		return prodVolume;
+	}
+
+	public void setProdVolume(String prodVolume) {
+		this.prodVolume = prodVolume;
+	}
+
+	public String getPackingType() {
+		return packingType;
+	}
+
+	public void setPackingType(String packingType) {
+		this.packingType = packingType;
+	}
+
+	public String getTotalCount() {
+		return totalCount;
+	}
+
+	public void setTotalCount(String totalCount) {
+		this.totalCount = totalCount;
 	}
 	
 }

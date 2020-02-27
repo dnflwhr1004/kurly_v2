@@ -66,34 +66,41 @@ mypageUpdateVue = {
                 <div class="row" style="margin: 2%;padding: 3%;">
                     <h1 class="col-md-3" style="color: #333333;font-size: 14px; margin-top: 3%; ">아이디*</h1>
                     <input id="userId" class="col-md-6" type="text" 
+
                      label="password"  style="width: 60%; height:40px; border-radius: 5px; border: 0.5px solid #c0c0c0; text-align: center" >
                      <div class="col-md-3" style="opacity: 0;">d</div>
                      <h1 class="col-md-3" style="color: #333333;font-size: 14px; margin-top: 3%; ">현재비밀번호*</h1>
                     <input id="currentPass" class="col-md-6" type="text" 
                      label="password"  style="margin-top: 2%;width: 60%; height:40px; border-radius: 5px; border: 0.5px solid #c0c0c0; text-align: center;" >
+
                      <div class="col-md-3" style="opacity: 0;">d</div>
                      <h1 class="col-md-3" style="color: #333333;font-size: 14px; margin-top: 3%; ">새 비밀번호</h1>
-                    <input id="newPass" class="col-md-6" type="text" 
+                    <input minlength="4" id="newPass" class="col-md-6" type="text" 
                      label="password"  style="margin-top: 2%;width: 60%; height:40px; border-radius: 5px; border: 0.5px solid #c0c0c0; text-align: center" >
+
                      <div class="col-md-3" style="opacity: 0;">d</div>
                      <h1 class="col-md-3" style="color: #333333;font-size: 14px; margin-top: 3%; ">새 비밀번호 확인</h1>
                     <input class="col-md-6" type="text" 
                      label="password"  style="margin-top: 2%;width: 60%; height:40px; border-radius: 5px; border: 0.5px solid #c0c0c0; text-align: center" >
+
                      <div class="col-md-3" style="opacity: 0;">d</div>
                      <h1 class="col-md-3" style="color: #333333;font-size: 14px; margin-top: 3%; ">이름*</h1>
-                    <input id="usrName" class="col-md-6" type="text" 
+                    <input minlength="4" id="usrName" class="col-md-6" type="text" 
                      label="name"  style="margin-top: 2%;width: 60%; height:40px; border-radius: 5px; border: 0.5px solid #c0c0c0; text-align: center" >
+
                      <div class="col-md-3" style="opacity: 0;">d</div>
                      <h1 class="col-md-3" style="color: #333333;font-size: 14px; margin-top: 3%; ">이메일*</h1>
-                    <input id="usrEmail" class="col-md-6" type="text" 
+                    <input minlength="4" id="usrEmail" class="col-md-6" type="text" 
                      label="email"  style="margin-top: 2%;width: 60%; height:40px; border-radius: 5px; border: 0.5px solid #c0c0c0; text-align: center" >
+
                      <div class="col-md-3"  style="margin-top: 2%;">
                           <button id="emailVali" type="button" style="width: 100%; height:40px;background-color: #5f0080;color: #fff;border-radius: 5px;letter-spacing: -1px;font-weight: 300;">
                         이메일 중복 확인</button>
                      </div>
                      <h1 class="col-md-3" style="color: #333333;font-size: 14px; margin-top: 3%; ">휴대폰*</h1>
-                    <input id="usrMobile" class="col-md-6" type="text" 
+                    <input minlength="4"   id="usrMobile" class="col-md-6" type="text" 
                      label="mobile"  style="margin-top: 2%;width: 60%; height:40px; border-radius: 5px; border: 0.5px solid #c0c0c0; text-align: center" >
+
                      <div class="col-md-3"  style="margin-top: 2%;">
                           <button type="button" style="width: 100%; height:40px;background-color: #5f0080;color: #fff;border-radius: 5px;letter-spacing: -1px;font-weight: 300;">
                         다른번호 인증</button>
@@ -101,6 +108,7 @@ mypageUpdateVue = {
                      <h1 class="col-md-3" style="opacity: 0; ">휴대폰*</h1>
                     <input class="col-md-6" type="text" 
                      label="password"  style="margin-top: 2%;width: 60%; height:40px; border-radius: 5px; border: 0.5px solid #c0c0c0; text-align: center" >
+
                      <div class="col-md-3" style="margin-top: 2%;">
                           <button type="button" style="width: 100%; height:40px;background-color: #fff;color: #c0c0c0;border-radius: 5px;letter-spacing: -1px;font-weight: 300;">
                         인증번호 확인</button>

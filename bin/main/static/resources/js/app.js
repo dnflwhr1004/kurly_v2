@@ -4,7 +4,7 @@ var app = app || {};
 app = (() => {
 	let init = () => {
 		$('body').html(homeVue.home_nav).append(homeVue.home_main).append(homeVue.home_footer);
-		go_join(), go_login(), get_recommands(), goodshop(), get_recommands_slide()
+		go_join(), go_login(), get_recommands(), goodshop(), smartProducts(), get_recommands_slide()
 	}
 	let run = () => {
 		import('/resources/js/vue/homeVue.js').then(() => { console.log('import homeVue') }),
@@ -16,7 +16,8 @@ app = (() => {
 			import('/resources/js/vue/pwsearchVue.js').then(() => { console.log('import pwsearchVue') }),
 			import('/resources/js/vue/mypageVue.js').then(() => { console.log('import mypageVue') }),
 			import('/resources/js/vue/mypageUpdateVue.js').then(() => { console.log('import mypageUpdateVue') }),
-			import('/resources/js/member/auth.js').then(() => { console.log('import auth') })
+			import('/resources/js/member/auth.js').then(() => { console.log('import auth') }),
+			import('/resources/js/vue/productListVue.js').then(()=>{console.log('import productListVue.js')})
 		init()
 	}
 	let go_join = () => {
@@ -671,24 +672,44 @@ app = (() => {
 
 	let get_recommands = () => {
 		$.getJSON(`/products/recommands`, d => {
-
 			get_recommands_slide(d)
-
-
-
-
 		})
 	}
 
+	let productList = ()=>{
+				alert('dddd')
+			  $('#body').html(prodcutListVue.prodcutListVue_go)
+
+				$.getJSON(`/products/`,d=>{
+				//console.log('sssss::'+JSON.stringify(d))
+				$.each(d,(i,j)=>{
+					$(`<div id="pi1" class=" col-md-4" style="padding: 1%;">
+                 <img style="position: relative" class="card-img-top img-zoom" src="${j.prodimg}" alt=""><a href="">
+                 <img style="position: absolute;top: 70%;left:80% " src="https://res.kurly.com/pc/service/common/1908/ico_list_add_cart.png" alt=""></a>
+                 <span class="name"><a href="">${j.prodname}</a></span>
+                 <br>
+                <span class="price"> ${j.price} 원 </span>
+            </div> `).appendTo(`#productListFrame`)
+				})
+			})
+}	
+/**navbar smartshopping start */
 	let goodshop = () => {
 		$('#good_shop').click(e => {
 			e.preventDefault()
-			$('#body').html(goodshopVue.goodshopVue_body)
+			productList()
+			
 		})
 	}
+/**navbar smartshopping end */
 
-
-
+		/**메인 알뜰상품  클릭 */
+	let smartProducts = () =>{
+		$('#todayNewProductBtn').click(e=>{
+			e.preventDefault()
+			productList()
+		})
+	}
+	/**메인 알뜰상품  클릭 end */
 	return { run }
 })()
-

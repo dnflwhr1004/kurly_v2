@@ -18,4 +18,5 @@ public class ProductService implements IService {
 	@Override public Product detail(Object o) { return productMapper.selectByProd(String.valueOf(o));}
 	@Override public List<?> list(Object o){ return productMapper.select((Product)o);}
 	public Product[] listRecommand(){ return productMapper.selectRecommand();}
+	
 }

@@ -43,10 +43,11 @@ public class MemberController {
 	
 	
 	@PutMapping("/{id}")
-	public Messenger updateMember(@PathVariable String id, @RequestBody Member param) {
+	public Messenger update(@PathVariable String id, @RequestBody Member param) {
+		member = memberService.detail(id);
 		
-		map.clear();
-		map.put("msg", "SUCCESS");
+		memberService.edit(param);
+		System.out.println(">>>" + id + "<<<<" + param);
 		return Messenger.SUCCESS;
 	}
 	
@@ -54,6 +55,19 @@ public class MemberController {
 	public Messenger delete(@PathVariable String userId, @RequestBody Member param) {
 		memberService.remove(param);
 		return Messenger.SUCCESS;
+	}
+	
+	@GetMapping("/{id}")
+	public Member get(@PathVariable String id) {
+		
+		return memberService.detail(id);
+		
+	}
+	
+	@GetMapping("/{page}/{search}")
+	public List<Member> get(@PathVariable String page,@PathVariable String search){
+		
+		return null;
 	}
 	
 	@PostMapping("/login")

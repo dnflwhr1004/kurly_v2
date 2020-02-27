@@ -52,8 +52,14 @@
 		AND  passwd LIKE #{passwd}
 	</select>
 
-	<update id="update">
-
+	<update id="update"
+		parameterType="com.wooyeon.web.domains.Member">
+		update users
+		set passwd = #{passwd},
+			username = #{userName},
+			mobile = #{mobile},
+			email = #{email}
+		where userid like #{userId}
 	</update>
 
 	<delete id="delete" parameterType="String">
